@@ -1,7 +1,12 @@
 import mongoose, { Schema } from "mongoose";
-mongoose.connect(process.env.MONGODB_URL);
+
+if (!process.env.MONGO_URL) {
+  throw new Error("MONGODB_URL environment variable is not defined.");
+}
+mongoose.connect(process.env.MONGO_URL);
 
 mongoose.Promise = global.Promise;
+
 
 const ticketSchema = new Schema(
   {
